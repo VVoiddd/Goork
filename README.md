@@ -1,12 +1,12 @@
-# Goork - Google Dorking Tool
+# Goork - Advanced Google Dorking Tool
 
-Goork is a user-friendly command-line interface (CLI) tool designed for Google Dorking. It allows users to perform advanced Google searches with various search parameters to retrieve specific information from the web.
+Goork is a command-line tool designed for performing advanced Google searches using various search parameters. It allows users to construct complex search queries and retrieve specific information from Google search results.
 
 ## Features
 
-- Supports various advanced Google search operators
-- Easy-to-use CLI interface
-- Displays search results with title, link, and snippet
+- Supports a wide range of Google search operators.
+- User-friendly CLI interface for entering search parameters.
+- Displays search results with titles, links, and snippets.
 
 ## Prerequisites
 
@@ -14,7 +14,7 @@ Goork is a user-friendly command-line interface (CLI) tool designed for Google D
 - `requests` library
 - `beautifulsoup4` library
 
-You can install the necessary libraries using the following commands:
+Install the required libraries using pip:
 
 ```bash
 pip install requests
@@ -26,8 +26,8 @@ pip install beautifulsoup4
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/goork.git
-cd goork
+git clone https://github.com/VVoiddd/Goork.git
+cd Goork
 ```
 
 2. Run the tool:
@@ -38,41 +38,37 @@ python goork.py
 
 ## Usage
 
-### Running the Tool
+### Using Goork
 
-When you run the tool, a graphical interface will appear where you can enter your search parameters.
-
-### Search Parameters
-
-The tool supports a variety of Google search operators that can be combined to refine your search:
+Goork allows you to build complex search queries by combining various search parameters. Here are the available search parameters:
 
 - **Query**: The main search term.
-- **Group**: Group the search terms.
-- **Wildcard**: Use a wildcard `*` in your search.
-- **Exact**: Search for an exact phrase by enclosing it in quotes.
-- **Number Range**: Specify a range of numbers (e.g., 10..20).
-- **Exclude**: Exclude certain words from the search.
-- **Include**: Include certain words in the search.
-- **Logical OR**: Use logical OR in your search (e.g., term1 OR term2).
-- **Synonym**: Search for synonyms by using the tilde `~`.
+- **Group**: Grouping search terms.
+- **Wildcard**: Use of wildcard `*` in searches.
+- **Exact**: Search for an exact phrase.
+- **Number Range**: Specify a range of numbers.
+- **Exclude**: Exclude specific words or phrases.
+- **Include**: Include specific words or phrases.
+- **Logical OR**: Use logical OR for multiple terms.
+- **Synonym**: Search for synonyms using the tilde `~`.
 - **Social**: Search social media content.
 - **After**: Search for content published after a specific date.
-- **Allintitle**: Search for pages with titles containing all the terms.
-- **Allinurl**: Search for pages with URLs containing all the terms.
-- **Allintext**: Search for pages with text containing all the terms.
-- **Around**: Use the AROUND operator to find terms within a certain number of words of each other.
+- **Allintitle**: Search for pages with titles containing all terms.
+- **Allinurl**: Search for pages with URLs containing all terms.
+- **Allintext**: Search for pages with text containing all terms.
+- **Around**: Search for terms within a certain proximity of each other.
 - **Author**: Search for content written by a specific author.
 - **Before**: Search for content published before a specific date.
 - **Cache**: Find the cached version of a page.
-- **Contains**: Search for pages containing specific file types or media.
+- **Contains**: Search for specific file types or media.
 - **Define**: Get the definition of a term.
 - **Filetype**: Search for specific file types.
 - **Inanchor**: Search for terms in anchor text.
 - **Index Of**: Find directory listings.
 - **Info**: Get information about a page.
-- **Intext**: Search for terms in the text of the page.
-- **Intitle**: Search for terms in the title of the page.
-- **Inurl**: Search for terms in the URL of the page.
+- **Intext**: Search for terms in the text of a page.
+- **Intitle**: Search for terms in the title of a page.
+- **Inurl**: Search for terms in the URL of a page.
 - **Link**: Search for pages that link to a URL.
 - **Location**: Search for content from a specific location.
 - **Safesearch**: Enable or disable SafeSearch.
@@ -81,23 +77,27 @@ The tool supports a variety of Google search operators that can be combined to r
 - **Stock**: Search for stock information.
 - **Weather**: Search for weather information.
 
-### Instructions
-
-1. **Enter Search Parameters**: Fill in the search parameters in the respective input fields.
-2. **Perform Search**: Click the "Search" button to execute the search.
-3. **View Results**: The search results will be displayed in the results area with the title, link, and snippet of each result.
-
 ### Example Usage
 
-1. To search for pages containing the phrase "open source" and excluding the term "proprietary", you would:
-   - Enter `open source` in the **Query** field.
-   - Enter `proprietary` in the **Exclude** field.
-   - Click the **Search** button.
+1. To search for pages containing "open source" but excluding "proprietary":
+
+   ```
+   Enter query: open source
+   Enter words to exclude (optional): proprietary
+   ```
 
 2. To search for PDFs related to Python programming:
-   - Enter `Python programming` in the **Query** field.
-   - Enter `pdf` in the **Filetype** field.
-   - Click the **Search** button.
+
+   ```
+   Enter query: Python programming
+   Enter filetype (optional): pdf
+   ```
+
+### Running the Tool
+
+1. Enter the relevant search parameters when prompted.
+2. The tool constructs the search query based on your inputs.
+3. Results are displayed with titles, links, and snippets.
 
 ## Contributing
 
@@ -105,5 +105,4 @@ Contributions are welcome! Please fork the repository and submit a pull request.
 
 ## License
 
-This project is licensed under the Goork License.
-
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
