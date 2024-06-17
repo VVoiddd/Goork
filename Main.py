@@ -1,3 +1,4 @@
+import webbrowser
 import requests
 from bs4 import BeautifulSoup
 
@@ -15,9 +16,13 @@ def create_search_query(params):
     if params['numrange']:
         query_parts.append(f"{params['numrange'][0]}..{params['numrange'][1]}")
     if params['exclude']:
-        query_parts.append(f"-{params['exclude']}")
+        excluded_words = params['exclude'].split(',')
+        for word in excluded_words:
+            query_parts.append(f"-{word.strip()}")
     if params['include']:
-        query_parts.append(f"+{params['include']}")
+        included_words = params['include'].split(',')
+        for word in included_words:
+            query_parts.append(f"+{word.strip()}")
     if params['logical_or']:
         query_parts.append(f"{params['logical_or'][0]} | {params['logical_or'][1]}")
     if params['synonym']:
@@ -77,17 +82,7 @@ def create_search_query(params):
 
 def perform_search(query):
     search_url = f"https://www.google.com/search?q={query}"
-    response = requests.get(search_url)
-    soup = BeautifulSoup(response.text, 'html.parser')
-
-    results = []
-    for g in soup.find_all('div', class_='g'):
-        title = g.find('h3').text if g.find('h3') else 'No title'
-        link = g.find('a')['href']
-        snippet = g.find('span', class_='aCOpRe').text if g.find('span', class_='aCOpRe') else 'No snippet'
-        results.append((title, link, snippet))
-
-    return results
+    return search_url
 
 def main():
     print("--- Welcome to Goork: Advanced Google Dorking Tool ---")
@@ -99,8 +94,8 @@ def main():
         'wildcard': input("Enter wildcard (optional, e.g., *): "),
         'exact': input("Enter exact phrase (optional): "),
         'numrange': (input("Enter number range start (optional): "), input("Enter number range end (optional): ")),
-        'exclude': input("Enter words to exclude (optional): "),
-        'include': input("Enter words to include (optional): "),
+        'exclude': input("Enter words to exclude, separated by commas (optional): "),
+        'include': input("Enter words to include, separated by commas (optional): "),
         'logical_or': (input("Enter first logical OR term (optional): "), input("Enter second logical OR term (optional): ")),
         'synonym': input("Enter synonym (optional): "),
         'social': input("Enter social handle (optional): "),
@@ -131,11 +126,9 @@ def main():
     }
 
     query = create_search_query(params)
-    results = perform_search(query)
-
-    print("\n--- Search Results ---")
-    for title, link, snippet in results:
-        print(f"Title: {title}\nLink: {link}\nSnippet: {snippet}\n")
+    search_url = perform_search(query)
+    print("\nOpening your default browser with search results...")
+    webbrowser.open_new_tab(search_url)
 
 if __name__ == "__main__":
     main()
