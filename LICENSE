@@ -1,19 +1,21 @@
-Goork License
-Version 1.0, June 2024
+MIT License
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Tool"), to deal in the Tool without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Tool, and to permit persons to whom the Tool is furnished to do so, subject to the following conditions:
+Copyright (c) 2024 VVoiddd
 
-1. You may use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Tool, provided that you:
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-   a. Do not claim or suggest that you are the author of the original Tool. Attribution to the original creator must be maintained.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-   b. Include the above copyright notice, this permission notice, and the disclaimer below in all copies or substantial portions of the Tool.
-
-2. The Tool is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the Tool or the use or other dealings in the Tool.
-
-3. If you distribute the Tool or derivative works based upon the Tool, you must do so under the same license terms as this license.
-
-4. This license does not grant you any rights to use the names, trademarks, service marks, or logos of the original creator, except as required for reasonable and customary use in describing the origin of the Tool and reproducing the content of the copyright notice.
-
-For inquiries about this license or permissions beyond the scope granted herein, please contact the original creator at your-email@example.com.
-
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
