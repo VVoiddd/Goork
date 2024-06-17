@@ -1,6 +1,3 @@
-import tkinter as tk
-from tkinter import ttk, scrolledtext
-import webbrowser
 import requests
 from bs4 import BeautifulSoup
 
@@ -90,213 +87,55 @@ def perform_search(query):
     
     return results
 
-def on_search():
-    params = {
-        'query': query_var.get(),
-        'group': group_var.get(),
-        'wildcard': wildcard_var.get(),
-        'exact': exact_var.get(),
-        'numrange': (numrange_start_var.get(), numrange_end_var.get()) if numrange_start_var.get() and numrange_end_var.get() else None,
-        'exclude': exclude_var.get(),
-        'include': include_var.get(),
-        'logical_or': (logical_or_var1.get(), logical_or_var2.get()) if logical_or_var1.get() and logical_or_var2.get() else None,
-        'synonym': synonym_var.get(),
-        'social': social_var.get(),
-        'after': after_var.get(),
-        'allintitle': allintitle_var.get(),
-        'allinurl': allinurl_var.get(),
-        'allintext': allintext_var.get(),
-        'around': (around_var1.get(), around_var2.get(), around_var3.get()) if around_var1.get() and around_var2.get() and around_var3.get() else None,
-        'author': author_var.get(),
-        'before': before_var.get(),
-        'cache': cache_var.get(),
-        'contains': contains_var.get(),
-        'define': define_var.get(),
-        'filetype': filetype_var.get(),
-        'inanchor': inanchor_var.get(),
-        'index_of': index_of_var.get(),
-        'info': info_var.get(),
-        'intext': intext_var.get(),
-        'intitle': intitle_var.get(),
-        'inurl': inurl_var.get(),
-        'link': link_var.get(),
-        'location': location_var.get(),
-        'safesearch': safesearch_var.get(),
-        'source': source_var.get(),
-        'site': site_var.get(),
-        'stock': stock_var.get(),
-        'weather': weather_var.get(),
-    }
+def main():
+    params = {}
+    params['query'] = input("Enter query: ")
+    params['group'] = input("Enter group (optional): ")
+    params['wildcard'] = input("Enter wildcard (optional): ")
+    params['exact'] = input("Enter exact phrase (optional): ")
+    numrange_start = input("Enter number range start (optional): ")
+    numrange_end = input("Enter number range end (optional): ")
+    params['numrange'] = (numrange_start, numrange_end) if numrange_start and numrange_end else None
+    params['exclude'] = input("Enter words to exclude (optional): ")
+    params['include'] = input("Enter words to include (optional): ")
+    logical_or1 = input("Enter first logical OR term (optional): ")
+    logical_or2 = input("Enter second logical OR term (optional): ")
+    params['logical_or'] = (logical_or1, logical_or2) if logical_or1 and logical_or2 else None
+    params['synonym'] = input("Enter synonym (optional): ")
+    params['social'] = input("Enter social handle (optional): ")
+    params['after'] = input("Enter after date (optional): ")
+    params['allintitle'] = input("Enter allintitle (optional): ")
+    params['allinurl'] = input("Enter allinurl (optional): ")
+    params['allintext'] = input("Enter allintext (optional): ")
+    around1 = input("Enter first AROUND term (optional): ")
+    around2 = input("Enter AROUND proximity (optional): ")
+    around3 = input("Enter second AROUND term (optional): ")
+    params['around'] = (around1, around2, around3) if around1 and around2 and around3 else None
+    params['author'] = input("Enter author (optional): ")
+    params['before'] = input("Enter before date (optional): ")
+    params['cache'] = input("Enter cache (optional): ")
+    params['contains'] = input("Enter contains (optional): ")
+    params['define'] = input("Enter define (optional): ")
+    params['filetype'] = input("Enter filetype (optional): ")
+    params['inanchor'] = input("Enter inanchor (optional): ")
+    params['index_of'] = input("Enter index of (optional): ")
+    params['info'] = input("Enter info (optional): ")
+    params['intext'] = input("Enter intext (optional): ")
+    params['intitle'] = input("Enter intitle (optional): ")
+    params['inurl'] = input("Enter inurl (optional): ")
+    params['link'] = input("Enter link (optional): ")
+    params['location'] = input("Enter location (optional): ")
+    params['safesearch'] = input("Enter safesearch (optional): ")
+    params['source'] = input("Enter source (optional): ")
+    params['site'] = input("Enter site (optional): ")
+    params['stock'] = input("Enter stock (optional): ")
+    params['weather'] = input("Enter weather (optional): ")
     
     query = create_search_query(params)
     results = perform_search(query)
-    display_results(results)
-
-def display_results(results):
-    results_text.configure(state='normal')
-    results_text.delete(1.0, tk.END)
     
     for title, link, snippet in results:
-        results_text.insert(tk.END, f"Title: {title}\nLink: {link}\nSnippet: {snippet}\n\n")
-    
-    results_text.configure(state='disabled')
+        print(f"Title: {title}\nLink: {link}\nSnippet: {snippet}\n")
 
-# Create the main window
-root = tk.Tk()
-root.title("Goork - Google Dorking Tool")
-root.geometry("800x800")
-
-# Create input fields
-ttk.Label(root, text="Query:").grid(row=0, column=0, sticky=tk.W, padx=10, pady=5)
-query_var = tk.StringVar()
-ttk.Entry(root, textvariable=query_var, width=50).grid(row=0, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Group:").grid(row=1, column=0, sticky=tk.W, padx=10, pady=5)
-group_var = tk.StringVar()
-ttk.Entry(root, textvariable=group_var, width=50).grid(row=1, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Wildcard:").grid(row=2, column=0, sticky=tk.W, padx=10, pady=5)
-wildcard_var = tk.StringVar()
-ttk.Entry(root, textvariable=wildcard_var, width=50).grid(row=2, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Exact:").grid(row=3, column=0, sticky=tk.W, padx=10, pady=5)
-exact_var = tk.StringVar()
-ttk.Entry(root, textvariable=exact_var, width=50).grid(row=3, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Number Range:").grid(row=4, column=0, sticky=tk.W, padx=10, pady=5)
-numrange_start_var = tk.StringVar()
-numrange_end_var = tk.StringVar()
-ttk.Entry(root, textvariable=numrange_start_var, width=24).grid(row=4, column=1, padx=10, pady=5, sticky=tk.W)
-ttk.Entry(root, textvariable=numrange_end_var, width=24).grid(row=4, column=1, padx=10, pady=5, sticky=tk.E)
-
-ttk.Label(root, text="Exclude:").grid(row=5, column=0, sticky=tk.W, padx=10, pady=5)
-exclude_var = tk.StringVar()
-ttk.Entry(root, textvariable=exclude_var, width=50).grid(row=5, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Include:").grid(row=6, column=0, sticky=tk.W, padx=10, pady=5)
-include_var = tk.StringVar()
-ttk.Entry(root, textvariable=include_var, width=50).grid(row=6, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Logical OR:").grid(row=7, column=0, sticky=tk.W, padx=10, pady=5)
-logical_or_var1 = tk.StringVar()
-logical_or_var2 = tk.StringVar()
-ttk.Entry(root, textvariable=logical_or_var1, width=24).grid(row=7, column=1, padx=10, pady=5, sticky=tk.W)
-ttk.Entry(root, textvariable=logical_or_var2, width=24).grid(row=7, column=1, padx=10, pady=5, sticky=tk.E)
-
-ttk.Label(root, text="Synonym:").grid(row=8, column=0, sticky=tk.W, padx=10, pady=5)
-synonym_var = tk.StringVar()
-ttk.Entry(root, textvariable=synonym_var, width=50).grid(row=8, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Social:").grid(row=9, column=0, sticky=tk.W, padx=10, pady=5)
-social_var = tk.StringVar()
-ttk.Entry(root, textvariable=social_var, width=50).grid(row=9, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="After:").grid(row=10, column=0, sticky=tk.W, padx=10, pady=5)
-after_var = tk.StringVar()
-ttk.Entry(root, textvariable=after_var, width=50).grid(row=10, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Allintitle:").grid(row=11, column=0, sticky=tk.W, padx=10, pady=5)
-allintitle_var = tk.StringVar()
-ttk.Entry(root, textvariable=allintitle_var, width=50).grid(row=11, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Allinurl:").grid(row=12, column=0, sticky=tk.W, padx=10, pady=5)
-allinurl_var = tk.StringVar()
-ttk.Entry(root, textvariable=allinurl_var, width=50).grid(row=12, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Allintext:").grid(row=13, column=0, sticky=tk.W, padx=10, pady=5)
-allintext_var = tk.StringVar()
-ttk.Entry(root, textvariable=allintext_var, width=50).grid(row=13, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Around:").grid(row=14, column=0, sticky=tk.W, padx=10, pady=5)
-around_var1 = tk.StringVar()
-around_var2 = tk.StringVar()
-around_var3 = tk.StringVar()
-ttk.Entry(root, textvariable=around_var1, width=16).grid(row=14, column=1, padx=10, pady=5, sticky=tk.W)
-ttk.Entry(root, textvariable=around_var2, width=16).grid(row=14, column=1, padx=10, pady=5)
-ttk.Entry(root, textvariable=around_var3, width=16).grid(row=14, column=1, padx=10, pady=5, sticky=tk.E)
-
-ttk.Label(root, text="Author:").grid(row=15, column=0, sticky=tk.W, padx=10, pady=5)
-author_var = tk.StringVar()
-ttk.Entry(root, textvariable=author_var, width=50).grid(row=15, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Before:").grid(row=16, column=0, sticky=tk.W, padx=10, pady=5)
-before_var = tk.StringVar()
-ttk.Entry(root, textvariable=before_var, width=50).grid(row=16, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Cache:").grid(row=17, column=0, sticky=tk.W, padx=10, pady=5)
-cache_var = tk.StringVar()
-ttk.Entry(root, textvariable=cache_var, width=50).grid(row=17, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Contains:").grid(row=18, column=0, sticky=tk.W, padx=10, pady=5)
-contains_var = tk.StringVar()
-ttk.Entry(root, textvariable=contains_var, width=50).grid(row=18, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Define:").grid(row=19, column=0, sticky=tk.W, padx=10, pady=5)
-define_var = tk.StringVar()
-ttk.Entry(root, textvariable=define_var, width=50).grid(row=19, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Filetype:").grid(row=20, column=0, sticky=tk.W, padx=10, pady=5)
-filetype_var = tk.StringVar()
-ttk.Entry(root, textvariable=filetype_var, width=50).grid(row=20, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Inanchor:").grid(row=21, column=0, sticky=tk.W, padx=10, pady=5)
-inanchor_var = tk.StringVar()
-ttk.Entry(root, textvariable=inanchor_var, width=50).grid(row=21, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Index Of:").grid(row=22, column=0, sticky=tk.W, padx=10, pady=5)
-index_of_var = tk.StringVar()
-ttk.Entry(root, textvariable=index_of_var, width=50).grid(row=22, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Info:").grid(row=23, column=0, sticky=tk.W, padx=10, pady=5)
-info_var = tk.StringVar()
-ttk.Entry(root, textvariable=info_var, width=50).grid(row=23, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Intext:").grid(row=24, column=0, sticky=tk.W, padx=10, pady=5)
-intext_var = tk.StringVar()
-ttk.Entry(root, textvariable=intext_var, width=50).grid(row=24, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Intitle:").grid(row=25, column=0, sticky=tk.W, padx=10, pady=5)
-intitle_var = tk.StringVar()
-ttk.Entry(root, textvariable=intitle_var, width=50).grid(row=25, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Inurl:").grid(row=26, column=0, sticky=tk.W, padx=10, pady=5)
-inurl_var = tk.StringVar()
-ttk.Entry(root, textvariable=inurl_var, width=50).grid(row=26, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Link:").grid(row=27, column=0, sticky=tk.W, padx=10, pady=5)
-link_var = tk.StringVar()
-ttk.Entry(root, textvariable=link_var, width=50).grid(row=27, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Location:").grid(row=28, column=0, sticky=tk.W, padx=10, pady=5)
-location_var = tk.StringVar()
-ttk.Entry(root, textvariable=location_var, width=50).grid(row=28, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Safesearch:").grid(row=29, column=0, sticky=tk.W, padx=10, pady=5)
-safesearch_var = tk.StringVar()
-ttk.Entry(root, textvariable=safesearch_var, width=50).grid(row=29, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Source:").grid(row=30, column=0, sticky=tk.W, padx=10, pady=5)
-source_var = tk.StringVar()
-ttk.Entry(root, textvariable=source_var, width=50).grid(row=30, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Site:").grid(row=31, column=0, sticky=tk.W, padx=10, pady=5)
-site_var = tk.StringVar()
-ttk.Entry(root, textvariable=site_var, width=50).grid(row=31, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Stock:").grid(row=32, column=0, sticky=tk.W, padx=10, pady=5)
-stock_var = tk.StringVar()
-ttk.Entry(root, textvariable=stock_var, width=50).grid(row=32, column=1, padx=10, pady=5)
-
-ttk.Label(root, text="Weather:").grid(row=33, column=0, sticky=tk.W, padx=10, pady=5)
-weather_var = tk.StringVar()
-ttk.Entry(root, textvariable=weather_var, width=50).grid(row=33, column=1, padx=10, pady=5)
-
-# Search button
-ttk.Button(root, text="Search", command=on_search).grid(row=34, column=1, pady=20)
-
-# Results display
-results_text = scrolledtext.ScrolledText(root, width=90, height=20, state='disabled')
-results_text.grid(row=35, column=0, columnspan=2, padx=10, pady=10)
-
-# Run the main loop
-root.mainloop()
+if __name__ == "__main__":
+    main()
