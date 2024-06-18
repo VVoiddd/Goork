@@ -6,8 +6,6 @@ Goork is a Python-based tool designed to help you perform advanced Google search
 
 - [Installation](#installation)
 - [Usage](#usage)
-  - [Running the Script](#running-the-script)
-  - [Example Usage](#example-usage)
 - [Parameters](#parameters)
   - [Main Parameters](#main-parameters)
   - [Advanced Parameters](#advanced-parameters)
@@ -16,6 +14,9 @@ Goork is a Python-based tool designed to help you perform advanced Google search
 - [License](#license)
 
 ## Installation
+
+<details>
+  <summary>Click to expand</summary>
 
 1. **Clone the repository:**
 
@@ -32,7 +33,12 @@ Goork is a Python-based tool designed to help you perform advanced Google search
     pip install requests beautifulsoup4
     ```
 
+</details>
+
 ## Usage
+
+<details>
+  <summary>Click to expand</summary>
 
 ### Running the Script
 
@@ -87,9 +93,14 @@ When prompted, you can enter values like these:
 - **Enter stock (optional):** `stock:python`
 - **Enter weather (optional):** `weather:usa`
 
+</details>
+
 ## Parameters
 
 ### Main Parameters
+
+<details>
+  <summary>Click to expand</summary>
 
 - **Query**: Main search term.
   - Example: `python programming`
@@ -106,7 +117,12 @@ When prompted, you can enter values like these:
 - **Numrange**: Number range (start and end).
   - Example: `1` (start), `100` (end)
 
+</details>
+
 ### Advanced Parameters
+
+<details>
+  <summary>Click to expand</summary>
 
 - **Exclude**: Words to exclude (comma-separated).
   - Example: `java, c++`
@@ -195,7 +211,12 @@ When prompted, you can enter values like these:
 - **Weather**: Weather.
   - Example: `weather:usa`
 
+</details>
+
 ## Examples
+
+<details>
+  <summary>Click to expand</summary>
 
 Here are some example queries you can use with Goork:
 
@@ -249,11 +270,23 @@ Here are some example queries you can use with Goork:
     filetype:pdf
     ```
 
+</details>
+
 ## Contributing
+
+<details>
+  <summary>Click to expand</summary>
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+</details>
+
 ## License
 
+<details>
+  <summary>Click to expand</summary>
+
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+</details>
 ```
