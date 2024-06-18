@@ -2,12 +2,18 @@
 
 Goork is a Python-based tool designed to help you perform advanced Google searches (Google dorking) with ease. This tool allows you to build complex search queries using various parameters and opens the results in your default web browser.
 
-## Features
+## Table of Contents
 
-- Create complex Google search queries with various parameters.
-- Supports exclusion, inclusion, exact phrases, number ranges, and more.
-- Automatically opens search results in your default web browser.
-- User-friendly input prompts to build search queries interactively.
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Running the Script](#running-the-script)
+  - [Example Usage](#example-usage)
+- [Parameters](#parameters)
+  - [Main Parameters](#main-parameters)
+  - [Advanced Parameters](#advanced-parameters)
+- [Examples](#examples)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Installation
 
@@ -28,6 +34,8 @@ Goork is a Python-based tool designed to help you perform advanced Google search
 
 ## Usage
 
+### Running the Script
+
 Run the script using Python:
 
 ```sh
@@ -44,45 +52,202 @@ When prompted, you can enter values like these:
 - **Enter group (optional):** `developers`
 - **Enter wildcard (optional):** `*programming*`
 - **Enter exact phrase (optional):** `"python tutorial"`
+- **Enter number range start (optional):** `1`
+- **Enter number range end (optional):** `100`
 - **Enter words to exclude, separated by commas (optional):** `java, c++`
 - **Enter words to include, separated by commas (optional):** `python, programming`
+- **Enter first logical OR term (optional):** `python`
+- **Enter second logical OR term (optional):** `javascript`
+- **Enter synonym (optional):** `~python`
+- **Enter social handle (optional):** `@python`
+- **Enter after date (optional):** `2022-01-01`
+- **Enter allintitle (optional):** `python tutorial`
+- **Enter allinurl (optional):** `python.org`
+- **Enter allintext (optional):** `python documentation`
+- **Enter first AROUND term (optional):** `python`
+- **Enter AROUND proximity (optional):** `5`
+- **Enter second AROUND term (optional):** `javascript`
+- **Enter author (optional):** `John Doe`
+- **Enter before date (optional):** `2022-01-01`
+- **Enter cache (optional):** `cache:python`
+- **Enter contains (optional):** `contains:python`
+- **Enter define (optional):** `define:python`
+- **Enter filetype (optional):** `filetype:pdf`
+- **Enter inanchor (optional):** `inanchor:python`
+- **Enter index of (optional):** `index of:python`
+- **Enter info (optional):** `info:python`
+- **Enter intext (optional):** `intext:python`
+- **Enter intitle (optional):** `intitle:python`
+- **Enter inurl (optional):** `inurl:python.org`
+- **Enter link (optional):** `link:python.org`
+- **Enter location (optional):** `location:usa`
+- **Enter safesearch (optional):** `safesearch:on`
+- **Enter source (optional):** `source:python.org`
+- **Enter site (optional):** `site:python.org`
+- **Enter stock (optional):** `stock:python`
+- **Enter weather (optional):** `weather:usa`
 
-### Full List of Parameters
+## Parameters
 
-- `query`: Main search term.
-- `group`: Group terms.
-- `wildcard`: Wildcard terms.
-- `exact`: Exact phrases.
-- `numrange`: Number range (start and end).
-- `exclude`: Words to exclude (comma-separated).
-- `include`: Words to include (comma-separated).
-- `logical_or`: Logical OR terms.
-- `synonym`: Synonyms.
-- `social`: Social handle.
-- `after`: Date after.
-- `allintitle`: All in title.
-- `allinurl`: All in URL.
-- `allintext`: All in text.
-- `around`: AROUND term (term1, proximity, term2).
-- `author`: Author name.
-- `before`: Date before.
-- `cache`: Cache.
-- `contains`: Contains.
-- `define`: Define.
-- `filetype`: File type.
-- `inanchor`: In anchor.
-- `index_of`: Index of.
-- `info`: Info.
-- `intext`: In text.
-- `intitle`: In title.
-- `inurl`: In URL.
-- `link`: Link.
-- `location`: Location.
-- `safesearch`: Safe search.
-- `source`: Source.
-- `site`: Site.
-- `stock`: Stock.
-- `weather`: Weather.
+### Main Parameters
+
+- **Query**: Main search term.
+  - Example: `python programming`
+  
+- **Group**: Group terms.
+  - Example: `developers`
+  
+- **Wildcard**: Wildcard terms.
+  - Example: `*programming*`
+  
+- **Exact**: Exact phrases.
+  - Example: `"python tutorial"`
+  
+- **Numrange**: Number range (start and end).
+  - Example: `1` (start), `100` (end)
+
+### Advanced Parameters
+
+- **Exclude**: Words to exclude (comma-separated).
+  - Example: `java, c++`
+  
+- **Include**: Words to include (comma-separated).
+  - Example: `python, programming`
+  
+- **Logical OR**: Logical OR terms.
+  - Example: `python` (first term), `javascript` (second term)
+  
+- **Synonym**: Synonyms.
+  - Example: `~python`
+  
+- **Social**: Social handle.
+  - Example: `@python`
+  
+- **After**: Date after.
+  - Example: `2022-01-01`
+  
+- **Allintitle**: All in title.
+  - Example: `python tutorial`
+  
+- **Allinurl**: All in URL.
+  - Example: `python.org`
+  
+- **Allintext**: All in text.
+  - Example: `python documentation`
+  
+- **Around**: AROUND term (term1, proximity, term2).
+  - Example: `python` (first term), `5` (proximity), `javascript` (second term)
+  
+- **Author**: Author name.
+  - Example: `John Doe`
+  
+- **Before**: Date before.
+  - Example: `2022-01-01`
+  
+- **Cache**: Cache.
+  - Example: `cache:python`
+  
+- **Contains**: Contains.
+  - Example: `contains:python`
+  
+- **Define**: Define.
+  - Example: `define:python`
+  
+- **Filetype**: File type.
+  - Example: `filetype:pdf`
+  
+- **Inanchor**: In anchor.
+  - Example: `inanchor:python`
+  
+- **Index of**: Index of.
+  - Example: `index of:python`
+  
+- **Info**: Info.
+  - Example: `info:python`
+  
+- **Intext**: In text.
+  - Example: `intext:python`
+  
+- **Intitle**: In title.
+  - Example: `intitle:python`
+  
+- **Inurl**: In URL.
+  - Example: `inurl:python.org`
+  
+- **Link**: Link.
+  - Example: `link:python.org`
+  
+- **Location**: Location.
+  - Example: `location:usa`
+  
+- **Safesearch**: Safe search.
+  - Example: `safesearch:on`
+  
+- **Source**: Source.
+  - Example: `source:python.org`
+  
+- **Site**: Site.
+  - Example: `site:python.org`
+  
+- **Stock**: Stock.
+  - Example: `stock:python`
+  
+- **Weather**: Weather.
+  - Example: `weather:usa`
+
+## Examples
+
+Here are some example queries you can use with Goork:
+
+1. **Basic Query:**
+    ```sh
+    python programming
+    ```
+
+2. **Exclude Words:**
+    ```sh
+    python programming -java -c++
+    ```
+
+3. **Include Words:**
+    ```sh
+    python programming +tutorial +guide
+    ```
+
+4. **Number Range:**
+    ```sh
+    python programming 1..100
+    ```
+
+5. **Exact Phrase:**
+    ```sh
+    "python tutorial"
+    ```
+
+6. **Logical OR:**
+    ```sh
+    python | javascript
+    ```
+
+7. **Synonym:**
+    ```sh
+    ~python
+    ```
+
+8. **Social Handle:**
+    ```sh
+    @python
+    ```
+
+9. **Date Range:**
+    ```sh
+    after:2022-01-01 before:2023-01-01
+    ```
+
+10. **Filetype:**
+    ```sh
+    filetype:pdf
+    ```
 
 ## Contributing
 
@@ -91,3 +256,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+```
