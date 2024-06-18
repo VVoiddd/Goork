@@ -1,65 +1,93 @@
-
-
 # Goork: Advanced Google Dorking Tool
 
-Goork is a Python script that enables advanced Google search queries, known as Google dorks, with various search parameters. It constructs complex search queries based on user inputs and opens the search results directly in your default web browser.
+Goork is a Python-based tool designed to help you perform advanced Google searches (Google dorking) with ease. This tool allows you to build complex search queries using various parameters and opens the results in your default web browser.
 
 ## Features
 
-- **Flexible Query Construction**: Construct complex Google search queries using multiple parameters like wildcards, exact phrases, number ranges, logical OR, synonyms, and more.
-- **Advanced Search Operators**: Utilize Google's advanced search operators like `allintitle`, `allinurl`, `allintext`, `AROUND()`, and others to refine your search.
-- **Exclusion and Inclusion**: Exclude specific words (`-word1, -word2`) or include specific words (`+word1, +word2`) in your search results.
-- **Open Search Results**: Directly open the search results in your default web browser for quick access.
+- Create complex Google search queries with various parameters.
+- Supports exclusion, inclusion, exact phrases, number ranges, and more.
+- Automatically opens search results in your default web browser.
+- User-friendly input prompts to build search queries interactively.
 
 ## Installation
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/VVoiddd/Goork.git
-   cd Goork
-   ```
+1. **Clone the repository:**
 
-2. Install dependencies:
-   ```bash
-   pip install requests beautifulsoup4
-   ```
+    ```sh
+    git clone https://github.com/VVoiddd/Goork.git
+    cd Goork
+    ```
 
-3. Run the script:
-   ```bash
-   python Main.py
-   ```
+2. **Install required packages:**
+
+    This script requires the `requests` and `beautifulsoup4` libraries. You can install them using pip:
+
+    ```sh
+    pip install requests beautifulsoup4
+    ```
 
 ## Usage
 
-1. **Run the Script**: Open a terminal or command prompt, navigate to the Goork directory, and run `Main.py`.
-   ```bash
-   python Main.py
-   ```
+Run the script using Python:
 
-2. **Enter Search Parameters**: Follow the prompts to enter various search parameters. Leave inputs blank for optional parameters.
-   - Enter query: Enter your main search query.
-   - Enter group (optional): Specify a group or category.
-   - Enter wildcard (optional): Use a wildcard for more flexible searching (e.g., `*`).
-   - ...
+```sh
+python Main.py
+```
 
-3. **View Results**: The script constructs the Google search query based on your inputs and opens the search results in your default web browser.
+You will be prompted to enter various search parameters. If you leave a prompt blank, that parameter will not be included in the search query.
 
-4. **Refine Queries**: Adjust parameters as needed to refine your search results or explore different query combinations.
+### Example Usage
 
-## Example
+When prompted, you can enter values like these:
 
-Suppose you want to search for software vulnerabilities but exclude mentions of cheats, fakes, and irrelevant results:
+- **Enter query:** `python programming`
+- **Enter group (optional):** `developers`
+- **Enter wildcard (optional):** `*programming*`
+- **Enter exact phrase (optional):** `"python tutorial"`
+- **Enter words to exclude, separated by commas (optional):** `java, c++`
+- **Enter words to include, separated by commas (optional):** `python, programming`
 
-- Enter query: `software vulnerabilities`
-- Enter words to exclude: `cheat, fake, irrelevant`
+### Full List of Parameters
 
-The script will construct a query that excludes the specified words and opens the search results in your browser.
+- `query`: Main search term.
+- `group`: Group terms.
+- `wildcard`: Wildcard terms.
+- `exact`: Exact phrases.
+- `numrange`: Number range (start and end).
+- `exclude`: Words to exclude (comma-separated).
+- `include`: Words to include (comma-separated).
+- `logical_or`: Logical OR terms.
+- `synonym`: Synonyms.
+- `social`: Social handle.
+- `after`: Date after.
+- `allintitle`: All in title.
+- `allinurl`: All in URL.
+- `allintext`: All in text.
+- `around`: AROUND term (term1, proximity, term2).
+- `author`: Author name.
+- `before`: Date before.
+- `cache`: Cache.
+- `contains`: Contains.
+- `define`: Define.
+- `filetype`: File type.
+- `inanchor`: In anchor.
+- `index_of`: Index of.
+- `info`: Info.
+- `intext`: In text.
+- `intitle`: In title.
+- `inurl`: In URL.
+- `link`: Link.
+- `location`: Location.
+- `safesearch`: Safe search.
+- `source`: Source.
+- `site`: Site.
+- `stock`: Stock.
+- `weather`: Weather.
 
 ## Contributing
 
-Contributions are welcome! If you have ideas for improvements, feel free to fork the repository and submit a pull request.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
-
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
