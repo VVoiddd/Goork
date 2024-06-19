@@ -285,9 +285,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## Updates
 
 <details>
-  <summary>Expand for Updates</summary>
-
-<details>
   <summary>June 2024</summary>
 
 - Added ASCII art logo for branding.
