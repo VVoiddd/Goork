@@ -287,10 +287,8 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 <details>
   <summary>Expand for Updates</summary>
 
-### June 2024
-
 <details>
-  <summary>Expand for details</summary>
+  <summary>June 2024</summary>
 
 - Added ASCII art logo for branding.
 - Implemented colored output using `colorama` for better user interface.
