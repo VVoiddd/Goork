@@ -1,6 +1,6 @@
 # Goork: Advanced Google Dorking Tool
 
-Goork is a Python-based tool designed to help you perform advanced Google searches (Google dorking) with ease. This tool allows you to build complex search queries using various parameters and opens the results in your default web browser.
+Goork is a Python-based tool designed to facilitate advanced Google searches (Google dorking) with ease. This tool enables users to construct intricate search queries using various parameters and view the results directly in their default web browser.
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@ Goork is a Python-based tool designed to help you perform advanced Google search
 ## Installation
 
 <details>
-  <summary>Click to expand</summary>
+  <summary>Expand for Installation Instructions</summary>
 
 1. **Clone the repository:**
 
@@ -27,7 +27,7 @@ Goork is a Python-based tool designed to help you perform advanced Google search
 
 2. **Install required packages:**
 
-    This script requires the `requests` and `beautifulsoup4` libraries. You can install them using pip:
+    Goork requires the `requests` and `beautifulsoup4` libraries. Install them using pip:
 
     ```sh
     pip install requests beautifulsoup4
@@ -38,21 +38,21 @@ Goork is a Python-based tool designed to help you perform advanced Google search
 ## Usage
 
 <details>
-  <summary>Click to expand</summary>
+  <summary>Expand for Usage Instructions</summary>
 
 ### Running the Script
 
-Run the script using Python:
+To execute the script, use Python:
 
 ```sh
 python Main.py
 ```
 
-You will be prompted to enter various search parameters. If you leave a prompt blank, that parameter will not be included in the search query.
+You will be prompted to input various search parameters. Leaving a prompt blank excludes that parameter from the search query.
 
 ### Example Usage
 
-When prompted, you can enter values like these:
+Sample input values:
 
 - **Enter query:** `python programming`
 - **Enter group (optional):** `developers`
@@ -100,9 +100,9 @@ When prompted, you can enter values like these:
 ### Main Parameters
 
 <details>
-  <summary>Click to expand</summary>
+  <summary>Expand for Main Parameters</summary>
 
-- **Query**: Main search term.
+- **Query**: Primary search term.
   - Example: `python programming`
   
 - **Group**: Group terms.
@@ -122,7 +122,7 @@ When prompted, you can enter values like these:
 ### Advanced Parameters
 
 <details>
-  <summary>Click to expand</summary>
+  <summary>Expand for Advanced Parameters</summary>
 
 - **Exclude**: Words to exclude (comma-separated).
   - Example: `java, c++`
@@ -216,9 +216,9 @@ When prompted, you can enter values like these:
 ## Examples
 
 <details>
-  <summary>Click to expand</summary>
+  <summary>Expand for Examples</summary>
 
-Here are some example queries you can use with Goork:
+Here are some example queries you can execute using Goork:
 
 1. **Basic Query:**
     ```sh
@@ -275,7 +275,7 @@ Here are some example queries you can use with Goork:
 ## Contributing
 
 <details>
-  <summary>Click to expand</summary>
+  <summary>Expand for Contribution Guidelines</summary>
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
@@ -284,9 +284,8 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## License
 
 <details>
-  <summary>Click to expand</summary>
+  <summary>Expand for License Information</summary>
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 </details>
-```
