@@ -289,8 +289,13 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ### June 2024
 
-- Added new parameter: `weather:usa`.
-- Enhanced script performance with caching mechanisms.
+- Added ASCII art logo for branding.
+- Implemented colored output using `colorama` for better user interface.
+- Introduced `print_help()` function to display search parameter usage.
+- Updated input handling to accept full search queries and parse parameters using regex.
+- Enhanced search query construction with `create_search_query()` function.
+- Integrated `perform_search()` to open search results in the default browser.
+- Improved user interaction and clarity through formatted output and clear instructions.
 
 </details>
 
