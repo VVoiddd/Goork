@@ -11,6 +11,7 @@ Goork is a Python-based tool designed to facilitate advanced Google searches (Go
   - [Advanced Parameters](#advanced-parameters)
 - [Examples](#examples)
 - [Contributing](#contributing)
+- [Updates](#updates)
 - [License](#license)
 
 ## Installation
@@ -278,6 +279,18 @@ Here are some example queries you can execute using Goork:
   <summary>Expand for Contribution Guidelines</summary>
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+</details>
+
+## Updates
+
+<details>
+  <summary>Expand for Updates</summary>
+
+### June 2024
+
+- Added new parameter: `weather:usa`.
+- Enhanced script performance with caching mechanisms.
 
 </details>
 
