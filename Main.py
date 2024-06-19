@@ -1,208 +1,246 @@
 import webbrowser
-import requests
-from bs4 import BeautifulSoup
 import re
+import sys
+from colorama import init, Fore
+
+# Initialize colorama for cross-platform colored output
+init(autoreset=True)
+
+# ASCII art logo
+logo = """
+ _____                      _    
+|  __ \                    | |   
+| |  \/  ___    ___   _ __ | | __
+| | __  / _ \  / _ \ | '__|| |/ /
+| |_\ \| (_) || (_) || |   |   < 
+ \____/ \___/  \___/ |_|   |_|\_\
+                                 
+"""
+
+def print_logo():
+    print(Fore.RED + logo)
+
+def print_help():
+    help_text = """
+--- Goork Help ---
+You can use the following parameters in your search query:
+- (group): Group terms (e.g., '(python developers)')
+- *wildcard*: Wildcard terms (e.g., '*programming*')
+- "exact phrase": Exact phrases (e.g., '"python tutorial"')
+- numrange: Number range (e.g., '1..100')
+- -exclude: Words to exclude (e.g., '-java')
+- +include: Words to include (e.g., '+python')
+- logical_or: Logical OR terms (e.g., 'python | javascript')
+- ~synonym: Synonyms (e.g., '~python')
+- @social: Social handle (e.g., '@python')
+- after: Date after (e.g., 'after:2022-01-01')
+- allintitle: All in title (e.g., 'allintitle:python tutorial')
+- allinurl: All in URL (e.g., 'allinurl:python.org')
+- allintext: All in text (e.g., 'allintext:python documentation')
+- around: AROUND term (e.g., 'python AROUND(5) javascript')
+- author: Author name (e.g., 'author:John Doe')
+- before: Date before (e.g., 'before:2022-01-01')
+- cache: Cached pages (e.g., 'cache:python.org')
+- contains: Contains (e.g., 'contains:python')
+- define: Definitions (e.g., 'define:python')
+- filetype: File type (e.g., 'filetype:pdf')
+- inanchor: In anchor (e.g., 'inanchor:python')
+- index_of: Index of (e.g., 'index of:python')
+- info: Info (e.g., 'info:python')
+- intext: In text (e.g., 'intext:python')
+- intitle: In title (e.g., 'intitle:python')
+- inurl: In URL (e.g., 'inurl:python')
+- link: Link (e.g., 'link:python.org')
+- location: Location (e.g., 'location:New York')
+- safesearch: SafeSearch (e.g., 'safesearch:strict')
+- source: Source (e.g., 'source:github')
+- site: Site (e.g., 'site:python.org')
+- stock: Stock (e.g., 'stock:GOOGL')
+- weather: Weather (e.g., 'weather:New York')
+"""
+    print(Fore.RED + help_text.strip())
+
+def parse_input(user_input):
+    params = {
+        'query': '',
+        'group': '',
+        'wildcard': '',
+        'exact': '',
+        'numrange': ('', ''),
+        'exclude': '',
+        'include': '',
+        'logical_or': ('', ''),
+        'synonym': '',
+        'social': '',
+        'after': '',
+        'allintitle': '',
+        'allinurl': '',
+        'allintext': '',
+        'around': ('', '', ''),
+        'author': '',
+        'before': '',
+        'cache': '',
+        'contains': '',
+        'define': '',
+        'filetype': '',
+        'inanchor': '',
+        'index_of': '',
+        'info': '',
+        'intext': '',
+        'intitle': '',
+        'inurl': '',
+        'link': '',
+        'location': '',
+        'safesearch': '',
+        'source': '',
+        'site': '',
+        'stock': '',
+        'weather': ''
+    }
+
+    patterns = {
+        'group': r'\(.*?\)',
+        'wildcard': r'\*.*?\*',
+        'exact': r'"[^"]+"',
+        'numrange': r'\d+\.\.\d+',
+        'exclude': r'-\w+',
+        'include': r'\+\w+',
+        'logical_or': r'\w+\s*\|\s*\w+',
+        'synonym': r'~\w+',
+        'social': r'@\w+',
+        'after': r'after:\S+',
+        'allintitle': r'allintitle:\S+',
+        'allinurl': r'allinurl:\S+',
+        'allintext': r'allintext:\S+',
+        'around': r'\w+\s*AROUND\(\d+\)\s*\w+',
+        'author': r'author:\S+',
+        'before': r'before:\S+',
+        'cache': r'cache:\S+',
+        'contains': r'contains:\S+',
+        'define': r'define:\S+',
+        'filetype': r'filetype:\S+',
+        'inanchor': r'inanchor:\S+',
+        'index_of': r'index\s*of:\S+',
+        'info': r'info:\S+',
+        'intext': r'intext:\S+',
+        'intitle': r'intitle:\S+',
+        'inurl': r'inurl:\S+',
+        'link': r'link:\S+',
+        'location': r'location:\S+',
+        'safesearch': r'safesearch:\S+',
+        'source': r'source:\S+',
+        'site': r'site:\S+',
+        'stock': r'stock:\S+',
+        'weather': r'weather:\S+'
+    }
+
+    for key, pattern in patterns.items():
+        matches = re.findall(pattern, user_input)
+        if matches:
+            if key in ['numrange', 'logical_or', 'around']:
+                params[key] = tuple(matches[0].split())
+            else:
+                params[key] = matches[0].strip(patterns[key][:3])
+
+    # The main query is the remaining part after extracting all known patterns
+    params['query'] = re.sub('|'.join(patterns.values()), '', user_input).strip()
+
+    return params
 
 def create_search_query(params):
     query_parts = []
 
-    query_parts.append(params['query'])
-
     for key, value in params.items():
-        if key == 'group':
-            if value:
-                query_parts.append(f"({value})")
-        elif key == 'wildcard':
-            if value:
-                query_parts.append(f"{value}*")
-        elif key == 'exact':
-            if value:
-                query_parts.append(f'"{value}"')
-        elif key == 'numrange':
-            if value[0] and value[1]:
-                query_parts.append(f"{value[0]}..{value[1]}")
-        elif key == 'exclude':
-            if value:
-                excluded_words = re.split(r'\s*,\s*', value)
-                for word in excluded_words:
-                    query_parts.append(f"-{word.strip()}")
-        elif key == 'include':
-            if value:
-                included_words = re.split(r'\s*,\s*', value)
-                for word in included_words:
-                    query_parts.append(f"+{word.strip()}")
-        elif key == 'logical_or':
-            if value[0] and value[1]:
-                query_parts.append(f"{value[0]} | {value[1]}")
-        elif key == 'synonym':
-            if value:
-                query_parts.append(f"~{value}")
-        elif key == 'social':
-            if value:
-                query_parts.append(f"@{value}")
-        elif key == 'after':
-            if value:
-                query_parts.append(f"after:{value}")
-        elif key == 'allintitle':
-            if value:
-                query_parts.append(f"allintitle:{value}")
-        elif key == 'allinurl':
-            if value:
-                query_parts.append(f"allinurl:{value}")
-        elif key == 'allintext':
-            if value:
-                query_parts.append(f"allintext:{value}")
-        elif key == 'around':
-            if value[0] and value[1] and value[2]:
-                query_parts.append(f"{value[0]} AROUND({value[1]}) {value[2]}")
-        elif key == 'author':
-            if value:
-                query_parts.append(f"author:{value}")
-        elif key == 'before':
-            if value:
-                query_parts.append(f"before:{value}")
-        elif key == 'cache':
-            if value:
-                query_parts.append(f"cache:{value}")
-        elif key == 'contains':
-            if value:
-                query_parts.append(f"contains:{value}")
-        elif key == 'define':
-            if value:
-                query_parts.append(f"define:{value}")
-        elif key == 'filetype':
-            if value:
-                query_parts.append(f"filetype:{value}")
-        elif key == 'inanchor':
-            if value:
-                query_parts.append(f"inanchor:{value}")
-        elif key == 'index_of':
-            if value:
-                query_parts.append(f"index of:{value}")
-        elif key == 'info':
-            if value:
-                query_parts.append(f"info:{value}")
-        elif key == 'intext':
-            if value:
-                query_parts.append(f"intext:{value}")
-        elif key == 'intitle':
-            if value:
-                query_parts.append(f"intitle:{value}")
-        elif key == 'inurl':
-            if value:
-                query_parts.append(f"inurl:{value}")
-        elif key == 'link':
-            if value:
-                query_parts.append(f"link:{value}")
-        elif key == 'location':
-            if value:
-                query_parts.append(f"location:{value}")
-        elif key == 'afesearch':
-            if value:
-                query_parts.append(f"safesearch:{value}")
-        elif key == 'ource':
-            if value:
-                query_parts.append(f"source:{value}")
-        elif key == 'ite':
-            if value:
-                query_parts.append(f"site:{value}")
-        elif key == 'tock':
-            if value:
-                query_parts.append(f"stock:{value}")
-        elif key == 'weather':
-            if value:
-                query_parts.append(f"weather:{value}")
+        if key == 'query':
+            query_parts.append(value)
+        elif key == 'group' and value:
+            query_parts.append(f"({value})")
+        elif key == 'wildcard' and value:
+            query_parts.append(f"{value}*")
+        elif key == 'exact' and value:
+            query_parts.append(f'"{value}"')
+        elif key == 'numrange' and value[0] and value[1]:
+            query_parts.append(f"{value[0]}..{value[1]}")
+        elif key == 'exclude' and value:
+            for word in re.split(r'\s*,\s*', value):
+                query_parts.append(f"-{word.strip()}")
+        elif key == 'include' and value:
+            for word in re.split(r'\s*,\s*', value):
+                query_parts.append(f"+{word.strip()}")
+        elif key == 'logical_or' and value[0] and value[1]:
+            query_parts.append(f"{value[0]} | {value[1]}")
+        elif key == 'synonym' and value:
+            query_parts.append(f"~{value}")
+        elif key == 'social' and value:
+            query_parts.append(f"@{value}")
+        elif key == 'after' and value:
+            query_parts.append(f"after:{value}")
+        elif key == 'allintitle' and value:
+            query_parts.append(f"allintitle:{value}")
+        elif key == 'allinurl' and value:
+            query_parts.append(f"allinurl:{value}")
+        elif key == 'allintext' and value:
+            query_parts.append(f"allintext:{value}")
+        elif key == 'around' and value[0] and value[1] and value[2]:
+            query_parts.append(f"{value[0]} AROUND({value[1]}) {value[2]}")
+        elif key == 'author' and value:
+            query_parts.append(f"author:{value}")
+        elif key == 'before' and value:
+            query_parts.append(f"before:{value}")
+        elif key == 'cache' and value:
+            query_parts.append(f"cache:{value}")
+        elif key == 'contains' and value:
+            query_parts.append(f"contains:{value}")
+        elif key == 'define' and value:
+            query_parts.append(f"define:{value}")
+        elif key == 'filetype' and value:
+            query_parts.append(f"filetype:{value}")
+        elif key == 'inanchor' and value:
+            query_parts.append(f"inanchor:{value}")
+        elif key == 'index_of' and value:
+            query_parts.append(f"index of:{value}")
+        elif key == 'info' and value:
+            query_parts.append(f"info:{value}")
+        elif key == 'intext' and value:
+            query_parts.append(f"intext:{value}")
+        elif key == 'intitle' and value:
+            query_parts.append(f"intitle:{value}")
+        elif key == 'inurl' and value:
+            query_parts.append(f"inurl:{value}")
+        elif key == 'link' and value:
+            query_parts.append(f"link:{value}")
+        elif key == 'location' and value:
+            query_parts.append(f"location:{value}")
+        elif key == 'safesearch' and value:
+            query_parts.append(f"safesearch:{value}")
+        elif key == 'source' and value:
+            query_parts.append(f"source:{value}")
+        elif key == 'site' and value:
+            query_parts.append(f"site:{value}")
+        elif key == 'stock' and value:
+            query_parts.append(f"stock:{value}")
+        elif key == 'weather' and value:
+            query_parts.append(f"weather:{value}")
 
     return " ".join(query_parts)
 
 def perform_search(query):
     search_url = f"https://www.google.com/search?q={query}"
-    return search_url
+    webbrowser.open_new_tab(search_url)
+    print(Fore.RED + f"Search URL: {search_url}")
 
 def main():
-    print("--- Welcome to Goork: Advanced Google Dorking Tool ---")
-    print("Enter search parameters or leave blank for optional ones.")
+    print_logo()
+    print(Fore.RED + "Type 'help' for a list of search parameters and their usage.")
+    user_input = input("Enter your search query: ")
 
-    query = input("Enter query (e.g., 'python programming'): ")
-    group = input("Enter group (optional, e.g., 'python developers'): ")
-    wildcard = input("Enter wildcard (optional, e.g., '*python*'): ")
-    exact = input("Enter exact phrase (optional, e.g., '\"python tutorial\"'): ")
-    numrange_start = input("Enter number range start (optional, e.g., '1'): ")
-    numrange_end = input("Enter number range end (optional, e.g., '10'): ")
-    exclude = input("Enter words to exclude, separated by commas (optional, e.g., 'java, c++'): ")
-    include = input("Enter words to include, separated by commas (optional, e.g., 'python, programming'): ")
-    logical_or_term1 = input("Enter first logical OR term (optional, e.g., 'python'): ")
-    logical_or_term2 = input("Enter second logical OR term (optional, e.g., 'javascript'): ")
-    synonym = input("Enter synonym (optional, e.g., '~python'): ")
-    social = input("Enter social handle (optional, e.g., '@python'): ")
-    after = input("Enter after date (optional, e.g., '2022-01-01'): ")
-    allintitle = input("Enter allintitle (optional, e.g., 'python tutorial'): ")
-    allinurl = input("Enter allinurl (optional, e.g., 'python.org'): ")
-    allintext = input("Enter allintext (optional, e.g., 'python documentation'): ")
-    around_term1 = input("Enter first AROUND term (optional, e.g., 'python'): ")
-    around_proximity = input("Enter AROUND proximity (optional, e.g., '5'): ")
-    around_term2 = input("Enter second AROUND term (optional, e.g., 'javascript'): ")
-    author = input("Enter author (optional, e.g., 'John Doe'): ")
-    before = input("Enter before date (optional, e.g., '2022-01-01'): ")
-    cache = input("Enter cache (optional, e.g., 'cache:python'): ")
-    contains = input("Enter contains (optional, e.g., 'contains:python'): ")
-    define = input("Enter define (optional, e.g., 'define:python'): ")
-    filetype = input("Enter filetype (optional, e.g., 'filetype:pdf'): ")
-    inanchor = input("Enter inanchor (optional, e.g., 'inanchor:python'): ")
-    index_of = input("Enter index of (optional, e.g., 'index of:python'): ")
-    info = input("Enter info (optional, e.g., 'info:python'): ")
-    intext = input("Enter intext (optional, e.g., 'intext:python'): ")
-    intitle = input("Enter intitle (optional, e.g., 'intitle:python'): ")
-    inurl = input("Enter inurl (optional, e.g., 'inurl:python.org'): ")
-    link = input("Enter link (optional, e.g., 'link:python.org'): ")
-    location = input("Enter location (optional, e.g., 'location:usa'): ")
-    safesearch = input("Enter safesearch (optional, e.g., 'afesearch:on'): ")
-    source = input("Enter source (optional, e.g., 'ource:python.org'): ")
-    site = input("Enter site (optional, e.g., 'ite:python.org'): ")
-    stock = input("Enter stock (optional, e.g., 'tock:python'): ")
-    weather = input("Enter weather (optional, e.g., 'weather:usa'): ")
+    if user_input.lower() == 'help':
+        print_help()
+        return
 
-    params = {
-        'query': query,
-        'group': group,
-        'wildcard': wildcard,
-        'exact': exact,
-        'numrange': (numrange_start, numrange_end),
-        'exclude': exclude,
-        'include': include,
-        'logical_or': (logical_or_term1, logical_or_term2),
-        'synonym': synonym,
-        'ocial': social,
-        'after': after,
-        'allintitle': allintitle,
-        'allinurl': allinurl,
-        'allintext': allintext,
-        'around': (around_term1, around_proximity, around_term2),
-        'author': author,
-        'before': before,
-        'cache': cache,
-        'contains': contains,
-        'define': define,
-        'filetype': filetype,
-        'inanchor': inanchor,
-        'index_of': index_of,
-        'info': info,
-        'intext': intext,
-        'intitle': intitle,
-        'inurl': inurl,
-        'link': link,
-        'location': location,
-        'afesearch': safesearch,
-        'ource': source,
-        'ite': site,
-        'tock': stock,
-        'weather': weather
-    }
-
+    params = parse_input(user_input)
     query = create_search_query(params)
-    search_url = perform_search(query)
-    print("\nOpening your default browser with search results...")
-    webbrowser.open_new_tab(search_url)
+    perform_search(query)
 
 if __name__ == "__main__":
     main()
