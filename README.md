@@ -289,6 +289,9 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ### June 2024
 
+<details>
+  <summary>Expand for details</summary>
+
 - Added ASCII art logo for branding.
 - Implemented colored output using `colorama` for better user interface.
 - Introduced `print_help()` function to display search parameter usage.
@@ -298,6 +301,9 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - Improved user interaction and clarity through formatted output and clear instructions.
 
 </details>
+
+</details>
+
 
 ## License
 
